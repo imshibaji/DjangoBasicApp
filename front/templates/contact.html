@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1>Contact Us</h1>
+    <div class="container">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form action="{% url 'contact' %}" method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group row">
+                <legend class="col-form-legend col-sm-1-12">Name</legend>
+                <div class="col-sm-1-12">
+                    <input type="text" class="form-control" name="name" placeholder="Input Your name" required >
+                </div>
+            </fieldset>
+            <fieldset class="form-group row">
+                <legend class="col-form-legend col-sm-1-12">Email</legend>
+                <div class="col-sm-1-12">
+                    <input type="email" class="form-control" name="email" placeholder="Input Your Email" required >
+                </div>
+            </fieldset>
+            <fieldset class="form-group row">
+                <legend class="col-form-legend col-sm-1-12">Message</legend>
+                <div class="col-sm-1-12">
+                    <textarea class="form-control" name="message" placeholder="Input Your Message"></textarea>
+                </div>
+            </fieldset>
+            <div class="form-group row">
+                <div class="offset-sm-0 col-sm-12">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
